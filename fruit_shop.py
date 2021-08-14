@@ -5,18 +5,20 @@ cart = []
 
 
 def main_menu():
-    print("1.-Add fruit \n2.-Delete fruit by name \n3.-Search fruit by name and rate")
-    print("4.-Change fruit name and rate")
+    print("1.Add fruit ")
+    print("2.-Delete fruit by name")
+    print("3.Search fruit by name and rate")
+    print("4.change fruit name and rate")
     print("5.-Add to cart")
     print("6.-Display all fruit data")
     print("7.display cart")
-    print('8.exit')
+    print('8.Delete item from cart')
+    print('9.exit')
 
 
 def add_fruit():
-    s_no = 0
     f_id = 0
-    s_no += 1
+    s_no = int(input('Enter serial number '))
     if s_no not in f.keys():
         f_id = f_id + 1
         f[s_no] = {
@@ -77,6 +79,7 @@ def add_to_cart():
     for i in f.keys():
         print('-'*10)
         print(f'fruit ids :  {i} ')
+
         print('-'*10)
 
     print('press on fruit id number to add to cart ')
@@ -85,9 +88,25 @@ def add_to_cart():
 
 
 def diplay_fruit():
-    for i, j in f.items():
-        print(
-            f" {i} | {j['fruit_name']} |{j['Fruit_rate']} | {j['imported_from']} |{j['imported_date']} | {j['buy_price']}  ")
+    if len(f) == 0:
+        print('!' * 30)
+        print('There is no fruit available')
+    else:
+        for i, j in f.items():
+            print(
+                f" {i} | {j['fruit_name']} |{j['Fruit_rate']} | {j['imported_from']} |{j['imported_date']} | {j['buy_price']}  ")
+
+
+def display_cart():
+    print(cart)
+
+
+def delete_from_cart():
+    display_cart()
+    print('*'*20)
+    s_no = int(input(('Enter fruit_id for delete fruit from cart : ')))
+    cart.remove(f[s_no])
+    print(f'fruit removed from cart !!!!')
 
 
 while True:
@@ -118,8 +137,13 @@ while True:
         # display
         diplay_fruit()
     elif ch == 7:
-        print(cart)
+        # display cart
+        display_cart()
+
     elif ch == 8:
+        # delete item from cart
+        delete_from_cart()
+    elif ch == 9:
         break
     else:
         print('Invalid choice')
