@@ -3,6 +3,18 @@ print('Fruit management system')
 f = {}
 cart = []
 
+# small decorator for displaying data
+
+
+def my_decorator(func):
+
+    def wrap_func():
+        print('*'*30)
+        func()
+        print('*'*30)
+
+    return wrap_func
+
 
 def main_menu():
     print("1.Add fruit ")
@@ -16,6 +28,7 @@ def main_menu():
     print('9.exit')
 
 
+@my_decorator
 def add_fruit():
     f_id = 0
     s_no = int(input('Enter serial number '))
@@ -35,6 +48,7 @@ def add_fruit():
         print('serial key already taken')
 
 
+@my_decorator
 def delete_fruit():
     s_no = int(input('enter serial number'))
     if s_no not in f.keys():
@@ -43,6 +57,7 @@ def delete_fruit():
         del f[s_no]
 
 
+@my_decorator
 def search_fruit():
     print('a,A => search by name \n b,B => search by rate')
     choice = input('enter choice: ')
@@ -64,6 +79,7 @@ def search_fruit():
                 print('Not available with this price')
 
 
+@my_decorator
 def change_fruit():
     s_no = int(input('Enter serial number : '))
     if s_no not in f.keys():
@@ -75,18 +91,17 @@ def change_fruit():
         print('fruit name modified successfully ')
 
 
+@my_decorator
 def add_to_cart():
     for i in f.keys():
-        print('-'*10)
         print(f'fruit ids :  {i} ')
-
-        print('-'*10)
 
     print('press on fruit id number to add to cart ')
     cart.append(f[int(input('enter fruit id to add on cart : '))])
     print('Fruit added in the cart successfully')
 
 
+@my_decorator
 def diplay_fruit():
     if len(f) == 0:
         print('!' * 30)
@@ -97,10 +112,12 @@ def diplay_fruit():
                 f" {i} | {j['fruit_name']} |{j['Fruit_rate']} | {j['imported_from']} |{j['imported_date']} | {j['buy_price']}  ")
 
 
+@my_decorator
 def display_cart():
     print(cart)
 
 
+@my_decorator
 def delete_from_cart():
     display_cart()
     print('*'*20)
